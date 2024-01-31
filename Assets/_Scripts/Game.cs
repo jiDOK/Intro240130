@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -41,7 +42,7 @@ public class Game : MonoBehaviour
         b.transform.position = pos;
         // put in array
         info = posInt.ToString();
-        if(posInt.x >= bubbles.GetLength(0)|| posInt.y >= bubbles.GetLength(1)|| posInt.x < 0 || posInt.y < 0)
+        if (posInt.x >= bubbles.GetLength(0) || posInt.y >= bubbles.GetLength(1) || posInt.x < 0 || posInt.y < 0)
         {
             info = "Game Over!";
             return;
@@ -49,7 +50,19 @@ public class Game : MonoBehaviour
         bubbles[posInt.x, posInt.y] = b;
         //bubbles[posInt.x, posInt.y].transform.localScale = Vector3.one * 0.5f;
         // check neighbors recursively(?)
-        b.CheckNeighbors(posInt, bubbles);
+
+        List<Bubble> list = new List<Bubble>();
+
+        //for (int y = pos.y - 1; y <= pos.y + 1; y++)
+        //{
+        //    for (int x = pos.x - 1; x <= pos.x + 1; x++)
+        //    {
+        //        if (y < 0 || x < 0 || y >= bubbles.GetLength(1) || x >= bubbles.GetLength(0) || bubbles[x, y] == null) continue;
+        //        if (bColor == bubbles[x, y].bColor)
+        //        {
+        //        }
+        //    }
+        //}
 
 
 
@@ -66,7 +79,7 @@ public class Game : MonoBehaviour
     {
         for (int x = 0; x < bubbles.GetLength(0); x++)
         {
-            for(int y = 0; y < bubbles.GetLength(1); y++)
+            for (int y = 0; y < bubbles.GetLength(1); y++)
             {
                 Gizmos.DrawWireCube(new Vector3(x, y, 0f), Vector3.one);
             }
