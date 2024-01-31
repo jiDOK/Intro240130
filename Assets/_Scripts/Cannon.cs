@@ -21,8 +21,10 @@ public class Cannon : MonoBehaviour
         {
             int rndIdx = Random.Range(0, bubblePrefabs.Length);
             Bubble bubble = Instantiate(bubblePrefabs[rndIdx], spawnPoint.position, Quaternion.identity);
+            bubble.Init(transform.up);
         }
         curAngle -= Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
+        curAngle = Mathf.Clamp(curAngle, -85f, 85f);
         transform.eulerAngles = new Vector3(0f, 0f, curAngle);
     }
 }
