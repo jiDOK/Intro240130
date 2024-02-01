@@ -48,27 +48,7 @@ public class Game : MonoBehaviour
             return;
         }
         bubbles[posInt.x, posInt.y] = b;
-        //bubbles[posInt.x, posInt.y].transform.localScale = Vector3.one * 0.5f;
-        // check neighbors recursively(?)
-        b.CheckNeighbors(posInt, bubbles);
-
-        for (int y = 0; y < bubbles.GetLength(1); y++)
-        {
-            for (int x = 0; x < bubbles.GetLength(0); x++)
-            {
-                if (bubbles[x, y] != null && bubbles[x, y].deleteMe)
-                {
-                    Destroy(bubbles[x, y].gameObject);
-                    bubbles[x, y] = null;
-                }
-            }
-        }
-
-
-
-
-        //b.transform.position = new Vector3(Mathf.Ceil(pos.x), Mathf.Floor(pos.y), 0f);
-
+        // use breadth first search to find path
     }
 
     private void OnGUI()
