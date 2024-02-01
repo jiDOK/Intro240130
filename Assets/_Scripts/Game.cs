@@ -50,19 +50,20 @@ public class Game : MonoBehaviour
         bubbles[posInt.x, posInt.y] = b;
         //bubbles[posInt.x, posInt.y].transform.localScale = Vector3.one * 0.5f;
         // check neighbors recursively(?)
+        b.CheckNeighbors(posInt, bubbles);
 
-        List<Bubble> list = new List<Bubble>();
+        for (int y = 0; y < bubbles.GetLength(1); y++)
+        {
+            for (int x = 0; x < bubbles.GetLength(0); x++)
+            {
+                if (bubbles[x, y] != null && bubbles[x, y].deleteMe)
+                {
+                    Destroy(bubbles[x, y].gameObject);
+                    bubbles[x, y] = null;
+                }
+            }
+        }
 
-        //for (int y = pos.y - 1; y <= pos.y + 1; y++)
-        //{
-        //    for (int x = pos.x - 1; x <= pos.x + 1; x++)
-        //    {
-        //        if (y < 0 || x < 0 || y >= bubbles.GetLength(1) || x >= bubbles.GetLength(0) || bubbles[x, y] == null) continue;
-        //        if (bColor == bubbles[x, y].bColor)
-        //        {
-        //        }
-        //    }
-        //}
 
 
 
