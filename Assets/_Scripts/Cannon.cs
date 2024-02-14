@@ -8,10 +8,13 @@ public class Cannon : MonoBehaviour
     public Bubble[] bubblePrefabs;
     Transform spawnPoint;
     float curAngle;
+    Bubble nextBubble;
 
     void Start()
     {
         spawnPoint = transform.Find("SpawnPoint");
+        int rndIdx = Random.Range(0, bubblePrefabs.Length);
+        nextBubble = Instantiate(bubblePrefabs[rndIdx], transform.position + Vector3.right * 4, Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -19,9 +22,10 @@ public class Cannon : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            nextBubble.transform.position = spawnPoint.position;
+            nextBubble.SetDir(transform.up);
             int rndIdx = Random.Range(0, bubblePrefabs.Length);
-            Bubble bubble = Instantiate(bubblePrefabs[rndIdx], spawnPoint.position, Quaternion.identity);
-            bubble.SetDir(transform.up);
+            nextBubble = Instantiate(bubblePrefabs[rndIdx], transform.position + Vector3.right * 4, Quaternion.identity);
         }
         curAngle -= Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
         curAngle = Mathf.Clamp(curAngle, -85f, 85f);
